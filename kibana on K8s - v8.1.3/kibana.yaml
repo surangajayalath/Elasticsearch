@@ -1,0 +1,26 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: 8.3.2
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        env:
+          - name: NODE_OPTIONS
+            value: "--max-old-space-size=2048"
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 2
+          limits:
+            memory: 100Mi
+            cpu: 2
+  image: docker.elastic.co/elasticsearch/kibana:8.3.2
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch
+
+
